@@ -9,11 +9,28 @@ const LINES = [
     "> welcome.",
 ];
 
-export default function Hero() {
+export function Hero() {
+	const [visibleLines, setVisibleLines] = useState<number>(0);
+	const [showCursor, setShowCursor] = useState<boolean>(true);
+	
+	useEffect(() => {
+		if (visibleLines < LINES.length) {
+			const t = setTimeout(
+				() => setVisibleLines((v) => v + 1),
+				420
+			);
+			return () => clearTimeout(t);
+		} 
+	}, [visibleLines]);
+
+	useEffect(() => {
+		const t = setInterval(() => setShowCursor((c) => !c), 530);
+		return () => clearInterval(t);
+	}, []);
+
 	return (
-		<section className="hero">
-			<h1>Welcome</h1>
-			<p>This is the hero section.</p>
-		</section>
-	);
+
+		
+	
+
 }
